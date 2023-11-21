@@ -1,0 +1,87 @@
+import React from 'react'
+import ThemeProvider from './components/ThemeProvider'
+import ThemeContext from './components/ThemeContext'
+import ThemedComponent from './components/ThemedComponent'
+function App() {
+  return (
+    <>
+      <ThemeProvider>
+        <ThemedComponent/>
+      </ThemeProvider>
+    </>
+  )
+}
+
+export default App
+
+import React, { useContext,useState } from 'react'
+import ThemeContext from './ThemeContext'
+const ThemedComponent = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext)
+    return (
+        <>    
+         <h2 style={{ backgroundColor: theme === 'dark' ? '#000000' : '#ffffff' }}>
+            hello world
+        </h2>
+            <button onClick={toggleTheme}>CLick here to change theme</button>
+            {theme}
+        </>
+    )
+}
+export default ThemedComponent
+
+
+import React, {useState} from "react";
+import ThemeContext from "./ThemeContext";
+const ThemeProvider = ({ children }) => {
+    const [theme, setTheme] = useState('light');
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
+    };
+    return (
+        <ThemeContext.Provider value={{ theme, toggleTheme }} >
+            {children}
+        </ThemeContext.Provider >
+    )
+}
+export default ThemeProvider
+
+
+import { createContext } from "react";
+const ThemeContext = createContext();
+export default ThemeContext;
+import React from 'react';
+
+const MyComponent = () => {
+  const numberList = [1, 2, 3, 4, 5];
+
+  return (
+    <div>
+      <h1>Number List</h1>
+      <ul>
+        {numberList.map((number) => (
+          <li key={number}>{number}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default MyComponent;
+day5cw
+import React, {useState } from 'react'
+
+const LifeCycle = () => {
+    const[resourceType,setResourceType]=useState("COMPONENTS");
+    console.log("component mounted",resourceType);
+    return (
+        <div>
+            <button onClick={()=>setResourceType("Component Wil MOUNT")}>Posts</button>
+            <button onClick={()=>setResourceType("Component Did MOUNT")}>Users</button>
+            <button onClick={()=>setResourceType("Component Will Recieve Props!")}>Comments</button>
+            <h2>{resourceType}</h2>
+        </div>
+    )
+}
+export default LifeCycle
+day5 hw
