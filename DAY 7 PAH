@@ -1,0 +1,25 @@
+import React, { useEffect, useState } from 'react';
+
+function ProductList() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch('YOUR_API_ENDPOINT')
+      .then(response => response.json())
+      .then(data => setProducts(data));
+  }, []);
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
+      {products.map(product => (
+        <div key={product.id} style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '1rem' }}>
+          <h2>{product.name}</h2>
+          <p>{product.description}</p>
+          <p>${product.price}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default ProductList;
