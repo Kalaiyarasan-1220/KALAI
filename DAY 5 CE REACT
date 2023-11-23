@@ -1,0 +1,17 @@
+import React from 'react';
+
+const List = ({ data }) => {
+  if (data === null) {
+    throw new Error('Data is null');
+  }
+
+  return (
+    <ul>
+      {data.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+};
+
+export default List;
